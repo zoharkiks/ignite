@@ -46,6 +46,14 @@ const NEW_GAMES = `games?dates=${lastYear},${currentDate}&ordering=-released&pag
 export const newGamesUrl = () => `${BASE_URL}${NEW_GAMES}`
 
 
+// Game details
+export const gameDetailsUrl = (game_id) => `${BASE_URL}games/${game_id}`
+
+// Screenshots
+export const screenshotsUrl = (game_id) => `${BASE_URL}games/${game_id}/screenshots`
+
+
+
 
 
 

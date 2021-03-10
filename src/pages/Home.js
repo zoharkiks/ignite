@@ -2,16 +2,23 @@ import React, { useEffect } from "react";
 
 // Components
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 
 // Styling and anim
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import {useLocation} from 'react-router-dom'
 
 // redux setup
 import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 
 const Home = () => {
+// current location
+const location = useLocation();
+const pathId = location.pathname.split('/')[2]
+
+
   // fetch game data
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,6 +30,7 @@ const Home = () => {
 
   return (
     <GameList>
+      {pathId && <GameDetail />}
       <h2>Upcoming Games</h2>
       <Games>
         {upcoming.map((game) => (
@@ -61,7 +69,6 @@ const Home = () => {
           />
         ))}
       </Games>
-
     </GameList>
   );
 };
@@ -76,10 +83,9 @@ const GameList = styled(motion.div)`
 const Games = styled(motion.div)`
   min-height: 80vh;
   display: grid;
-  grid-template-columns:repeat(auto-fit, minmax(400px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 3rem;
-  grid-row-gap:5rem;
-
+  grid-row-gap: 5rem;
 `;
 
 export default Home;
